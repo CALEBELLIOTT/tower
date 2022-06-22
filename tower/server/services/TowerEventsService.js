@@ -5,6 +5,7 @@ import { BadRequest, Forbidden } from "../utils/Errors"
 
 class TowerEventsService {
 
+
   async getAll() {
     const towerEvents = await dbContext.TowerEvent.find()
     return towerEvents
@@ -53,7 +54,16 @@ class TowerEventsService {
 
   async decreaseCapacity(eventId) {
     let targetEvent = await dbContext.TowerEvent.findById(eventId)
+    if (targetEvent.capacity <= 0) {
+      throw new BadRequest('that event is completely booked')
+    }
     targetEvent.capacity--
+    await targetEvent.save()
+  }
+
+  async increaseCapacity(eventId) {
+    const targetEvent = await this.getById(eventId)
+    targetEvent.capacity++
     await targetEvent.save()
   }
 }
