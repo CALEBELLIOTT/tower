@@ -4,6 +4,7 @@ import { BadRequest, Forbidden } from "../utils/Errors"
 
 class TowerEventsService {
 
+
   async getAll() {
     const towerEvents = await dbContext.TowerEvent.find()
     return towerEvents
@@ -24,6 +25,9 @@ class TowerEventsService {
     if (originalEvent.creatorId.toString() !== body.creatorId) {
       throw new BadRequest("you cannot edit another person's event")
     }
+    if (originalEvent.isCanceled == true) {
+      throw new BadRequest('this event has been cancelled')
+    }
     originalEvent.name = body.name || originalEvent.name
     originalEvent.description = body.description || originalEvent.description
     originalEvent.coverImg = body.coverImg || originalEvent.coverImg
@@ -32,6 +36,16 @@ class TowerEventsService {
     originalEvent.type = body.type || originalEvent.type
     const updated = await originalEvent.save()
     return updated
+  }
+
+  async cancelEvent(eventId, userId) {
+    let target = await this.getById(eventId)
+    if (target.creatorId != userId) {
+      throw new BadRequest('You cannot cancel an event that is not yours')
+    }
+    target.isCanceled = target.isCanceled ? false : true
+    await target.save()
+    return ("event cancelled")
   }
 
 }
