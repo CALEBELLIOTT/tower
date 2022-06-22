@@ -1,9 +1,9 @@
+import { Logger } from "sass"
 import { dbContext } from "../db/DbContext"
 import { BadRequest, Forbidden } from "../utils/Errors"
 
 
 class TowerEventsService {
-
 
   async getAll() {
     const towerEvents = await dbContext.TowerEvent.find()
@@ -48,6 +48,14 @@ class TowerEventsService {
     return ("event cancelled")
   }
 
+
+
+
+  async decreaseCapacity(eventId) {
+    let targetEvent = await dbContext.TowerEvent.findById(eventId)
+    targetEvent.capacity--
+    await targetEvent.save()
+  }
 }
 
 export const towerEventsService = new TowerEventsService()
