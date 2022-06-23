@@ -1,8 +1,10 @@
 
 <template>
-  <div class="row">
+  <div class="row my-2">
     <div class="col-12">
-      <h1>TOWER</h1>
+      <h1>
+        <router-link :to="{ name: 'Home' }"><span> TOWER</span></router-link>
+      </h1>
     </div>
   </div>
 </template>

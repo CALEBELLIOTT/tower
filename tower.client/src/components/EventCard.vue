@@ -3,19 +3,26 @@
 
   <div class="row">
     <div class="col-12">
-      <div class="div d-flex flex-column justify-content-end event-card rounded p-0 m-2"
-        :style="`background-image: url(${getImgUrl()})`">
-        <div class="row ">
-          <div class="col-12">
-            <div class="bg-filter">
-              <p class="m-0 pt-2"><b>{{ towerEvent.name }}</b></p>
-              <p class="text-secondary m-0"><b>{{ towerEvent.location }}</b></p>
-              <p class="text-secondary mb-0 pb-0"><b>{{ towerEvent.startDate }}</b></p>
-              <p class="text-end m-0"><b><span class="text-danger">{{ towerEvent.capacity }}</span> Spots Left!</b></p>
+      <router-link :to="{ name: 'Event', params: { id: towerEvent.id } }">
+        <div class="div d-flex flex-column justify-content-end event-card rounded p-0 m-2"
+          :style="`background-image: url(${getImgUrl()})`">
+          <div class="row ">
+            <div class="col-12">
+              <div class="bg-filter">
+                <p class="my-0 mx-2 pt-2"><b>{{ towerEvent.name }}</b></p>
+                <p class="text-secondary mx-2 m-0"><b>{{ towerEvent.location }}</b></p>
+                <p class="text-secondary mx-2 mb-0 pb-0"><b>{{ towerEvent.startDate }}</b></p>
+                <p v-if="towerEvent.capacity >= 1" class="text-end m-0 mx-2"><b><span class="text-danger">{{
+                    towerEvent.capacity
+                }}</span> Spots Left!</b></p>
+                <p v-if="towerEvent.capacity <= 0" class="text-dark bg-danger m-0 text-center"><b>SOLD OUT</b></p>
+                <p v-if="towerEvent.isCancelled == true" class="text-dark bg-danger m-0 text-center"><b>EVENT
+                    CANCELLED</b></p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 
@@ -32,7 +39,6 @@ export default {
     return {
       events: computed(() => AppState.events),
       getImgUrl() {
-        console.log(props.towerEvent.coverImg);
         return props.towerEvent.coverImg
       }
     }
@@ -47,6 +53,7 @@ export default {
   height: 25vh;
   background-size: cover;
   background-repeat: no-repeat;
+  text-shadow: 1px 1px 1px black;
 
 }
 
@@ -56,6 +63,5 @@ export default {
 
 .bg-filter {
   backdrop-filter: blur(10px) grayscale(50%);
-
 }
 </style>
