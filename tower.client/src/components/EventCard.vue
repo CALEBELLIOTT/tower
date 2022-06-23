@@ -9,8 +9,9 @@
           <div class="col-12">
             <div class="bg-filter">
               <p class="m-0 pt-2"><b>{{ towerEvent.name }}</b></p>
-              <p class="text-muted m-0"><b>{{ towerEvent.location }}</b></p>
-              <p class="text-muted mb-0 pb-2"><b>{{ towerEvent.startDate }}</b></p>
+              <p class="text-secondary m-0"><b>{{ towerEvent.location }}</b></p>
+              <p class="text-secondary mb-0 pb-0"><b>{{ towerEvent.startDate }}</b></p>
+              <p class="text-end m-0"><b><span class="text-danger">{{ towerEvent.capacity }}</span> Spots Left!</b></p>
             </div>
           </div>
         </div>
@@ -47,6 +48,10 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
 
+}
+
+.event-card:hover {
+  cursor: pointer;
 }
 
 .bg-filter {

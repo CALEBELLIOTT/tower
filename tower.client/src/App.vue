@@ -7,7 +7,7 @@
         </main>
       </div>
       <div class="col-1">
-        <Navbar />
+        <Navbar class="sticky" />
       </div>
     </div>
   </div>
@@ -29,4 +29,8 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
+
+.sticky {
+  position: fixed
+}
 </style>

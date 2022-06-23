@@ -1,7 +1,9 @@
 <template>
   <div class="container-fluid">
+    <Logo></Logo>
+    <HeroImg></HeroImg>
     <div class="row">
-      <div class="col-3" v-for="e in events" :key="e.id">
+      <div class="col-md-3" v-for="e in events" :key="e.id">
         <EventCard :towerEvent="e"></EventCard>
       </div>
     </div>
