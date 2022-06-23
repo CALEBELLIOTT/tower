@@ -1,7 +1,7 @@
 
 <template>
   <div class="row">
-    <div class="col-12 bg-hero">
+    <div class="col-12 bg-hero rounded">
       <div class="row">
         <div class="col-6 d-flex flex-column align-items-center mt-5 pt-3">
           <h3 class="mb-4">Get Ahead Of The Scalpers</h3>

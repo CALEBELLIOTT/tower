@@ -1,10 +1,12 @@
 
 <template>
-  <div class="container bg-dark">
+  <div class="container bg-dark flex-grow">
     <div class="row">
       <div class="col-12">
         <Logo></Logo>
         <EventInfo :activeEvent="activeEvent"></EventInfo>
+        <WhoIsAttendingBar></WhoIsAttendingBar>
+        <Comments></Comments>
       </div>
     </div>
   </div>
@@ -21,8 +23,9 @@ export default {
   setup() {
     const route = useRoute()
     onMounted(async () => {
-      await eventsService.getEventById(route.params.id),
-        await eventsService.getEventAttendees(route.params.id)
+      await eventsService.getEventById(route.params.id)
+      await eventsService.getEventAttendees(route.params.id)
+      await eventsService.getEventComments(route.params.id)
     })
     return {
       activeEvent: computed(() => AppState.activeEvent)
@@ -33,4 +36,7 @@ export default {
 
 
 <style lang="scss" scoped>
+.flex-grow {
+  min-height: 100vh;
+}
 </style>
