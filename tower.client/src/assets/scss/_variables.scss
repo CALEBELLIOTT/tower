@@ -1,13 +1,14 @@
 $body-bg: #e5e5e5;
-$primary: #3ba5dc;
+$primary: rgba(86, 199, 251, 1);
 $secondary: #8392ab;
-$success: #00f867;
-$info: #5d0149;
-$warning: #fbcf33;
-$danger: #ea0606;
+$success: rgba(121, 231, 171, 1);
+$info: rgba(204, 243, 253, 1);
+$warning: rgba(255, 212, 100, 1);
+$danger: rgba(255, 89, 119, 1);
 $light: #e9ecef;
-$dark: #111927;
+$dark: rgba(42, 45, 58, 1);
 $grey: #cbcbcb;
+$dark-lighten: rgba(71, 76, 97, 1);
 
 $font-sans-serif: Open Sans;
 $font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
