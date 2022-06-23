@@ -21,7 +21,8 @@ export default {
   setup() {
     const route = useRoute()
     onMounted(async () => {
-      await eventsService.getEventById(route.params.id)
+      await eventsService.getEventById(route.params.id),
+        await eventsService.getEventAttendees(route.params.id)
     })
     return {
       activeEvent: computed(() => AppState.activeEvent)
