@@ -1,42 +1,34 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+  <div class="row text-light">
+    <div class="col-12 d-flex flex-column bg-dark-lighten align-items-center">
+      <login></login>
+      <router-link :to='{ name: "Home" }'>
+        <h5 class="my-2">Home</h5>
+      </router-link>
+      <div v-if="user.name" class="d-flex flex-column align-items-center">
+        <router-link :to="{ name: 'Account' }">
+          <h5 class="my-2">Account</h5>
+        </router-link>
+        <button class="btn btn-success my-2">Create Event</button>
+        <button @click="logout()" class="btn btn-outline-light my-2">Log Out</button>
       </div>
-    </router-link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon" />
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <router-link
-            :to="{ name: 'About' }"
-            class="btn text-success lighten-30 selectable text-uppercase"
-          >
-            About
-          </router-link>
-        </li>
-      </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <Login />
     </div>
-  </nav>
+  </div>
 </template>
 
 <script>
+import { computed } from "vue";
+import { AppState } from "../AppState";
+import { AuthService } from "../services/AuthService";
+
 export default {
   setup() {
-    return {};
+    return {
+      user: computed(() => AppState.user),
+      async logout() {
+        AuthService.logout({ returnTo: window.location.origin });
+      },
+    };
   },
 };
 </script>
@@ -45,12 +37,19 @@ export default {
 a:hover {
   text-decoration: none;
 }
+
 .nav-link {
   text-transform: uppercase;
 }
+
 .navbar-nav .router-link-exact-active {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.bg-dark-lighten {
+  background: linear-gradient(rgba(71, 76, 97, 1), rgba(42, 45, 58, 1));
+  height: 100vh;
 }
 </style>
