@@ -1,6 +1,6 @@
 
 <template>
-  <div class="row my-2">
+  <div class="row my-2 mt-4">
     <div class="col-12">
       <h1>
         <router-link :to="{ name: 'Home' }"><span> TOWER</span></router-link>

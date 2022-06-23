@@ -1,6 +1,6 @@
 
 <template>
-  <div class="row">
+  <div class="row mb-2">
     <div class="col-12 bg-hero rounded">
       <div class="row">
         <div class="col-6 d-flex flex-column align-items-center mt-5 pt-3">

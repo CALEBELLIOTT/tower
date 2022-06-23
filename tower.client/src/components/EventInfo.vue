@@ -22,8 +22,8 @@
             <button v-if="checkAttending()" @click="cancelAttendEvent" class="btn btn-danger"><i
                 class="mdi mdi-human-handsdown"></i>
               Cancel Attendance</button>
-            <button v-if="checkAttending() == false" @click="attendEvent" class="btn btn-warning"><i
-                class="mdi mdi-human-handsdown"></i>
+            <button v-if="checkAttending() == false && activeEvent.capacity > 0" @click="attendEvent"
+              class="btn btn-warning"><i class="mdi mdi-human-handsdown"></i>
               Attend</button>
           </div>
         </div>
