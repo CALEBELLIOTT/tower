@@ -53,6 +53,12 @@ class EventsService {
     AppState.activeEvent.capacity++
     console.log(res.data);
   }
+
+  async createEvent(body) {
+    const res = await api.post('api/events', body)
+    AppState.events.push(res.data)
+    console.log(res.data);
+  }
 }
 
 export const eventsService = new EventsService()

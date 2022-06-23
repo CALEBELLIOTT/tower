@@ -1,4 +1,5 @@
 <template>
+  <CreateEventModal></CreateEventModal>
   <div class="row text-light">
     <div class="col-12 d-flex flex-column bg-dark-lighten align-items-center">
       <login></login>
@@ -9,7 +10,7 @@
         <router-link :to="{ name: 'Account' }">
           <h5 class="my-2">Account</h5>
         </router-link>
-        <button class="btn btn-success my-2">Create Event</button>
+        <button class="btn btn-success my-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Create Event</button>
         <button @click="logout()" class="btn btn-outline-light my-2">Log Out</button>
       </div>
     </div>
