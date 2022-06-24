@@ -52,6 +52,12 @@ class EventsService {
     AppState.activeEvent.capacity--
   }
 
+  async deleteTicket(id) {
+    const res = await api.delete('api/tickets/' + id)
+    AppState.accountEvents = AppState.accountEvents.filter(e => e.id != id)
+    console.log(res.data);
+  }
+
   async cancelAttendEvent() {
     let found = AppState.activeEventTickets.find(t => t.accountId == AppState.account.id)
     const res = await api.delete(`api/tickets/${found.id}`)
@@ -63,7 +69,7 @@ class EventsService {
   async createEvent(body) {
     const res = await api.post('api/events', body)
     AppState.events.push(res.data)
-    console.log(res.data);
+    return res.data
   }
 
   async deleteEvent(eventId) {

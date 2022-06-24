@@ -3,12 +3,12 @@
   <div class="container mt-4">
     <div class="row">
       <div class="col-12">
-        <p class="text-dark-lighten m-0">See Who Is Attending</p>
+        <p class="text-light m-0">See Who Is Attending</p>
       </div>
     </div>
     <div class="row bg-dark-lighten rounded profile-row">
       <div class="col-12">
-        <img class="my-2 profile-img" v-for="t in tickets" :src="t.account.picture" alt="">
+        <img class="my-2 profile-img" v-for="t in tickets" :title="t.account.name" :src="t.account.picture" alt="">
         <div v-if="tickets.length == 0" class="d-flex align-items-center justify-content-center profile-row">
           <p class=" text-dark-lighten">nobody to show</p>
         </div>

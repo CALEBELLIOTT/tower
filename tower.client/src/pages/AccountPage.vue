@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <div v-for="t in tickets" class="col-3">
-        <EventCard :towerEvent="t.event"></EventCard>
+        <ProfileEventCard :towerEvent="t"></ProfileEventCard>
       </div>
     </div>
   </div>

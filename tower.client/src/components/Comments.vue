@@ -3,7 +3,7 @@
   <div class="container my-5">
     <div class="row">
       <div class="col-12">
-        <p class="text-dark-lighten m-0">What Are People Saying</p>
+        <p class="text-light m-0">What Are People Saying</p>
       </div>
     </div>
     <div class="row bg-dark-lighten rounded p-md-2">
@@ -16,16 +16,16 @@
             <button class="btn btn-success mt-2" type="submit">Post Comment</button>
           </div>
         </form>
-        <div v-for="c in comments" :key="c.id" class="col-12 d-flex align-items-center my-3">
+        <div v-for="c in comments" :key="c.id" class="col-12 d-flex align-items-center my-3 comment-content">
           <img class="profile-img" :src="c.creator.picture" alt="">
-          <div class="d-flex flex-column mx-3 bg-primary rounded comment-body p-2 my-2">
+          <div class="d-flex flex-column mx-3 bg-dark rounded comment-body p-2 my-2">
             <div class="d-flex">
-              <p class="m-0 me-2 ms-2"><b>{{ c.creator.name }}</b></p>
+              <p class="m-0 me-2 ms-2 text-light"><b>{{ c.creator.name }}</b></p>
               <button @click="deleteComment(`${c.id}`)" v-if="c.creator.id == account.id"
                 class="btn btn-outline-danger">delete
                 comment</button>
             </div>
-            <p class="mt-2 m-0 me-5 ms-2">{{ c.body }}</p>
+            <p class="mt-2 m-0 me-5 ms-2 text-light">{{ c.body }}</p>
           </div>
         </div>
       </div>
@@ -84,5 +84,9 @@ export default {
 
 .text-dark-lighten {
   color: rgba(121, 129, 166, 1)
+}
+
+.comment-content {
+  text-shadow: 1px 0 black;
 }
 </style>

@@ -81,6 +81,7 @@
 
 <script>
 import { ref } from "vue";
+import { router } from "../router";
 import { eventsService } from "../services/EventsService";
 import Pop from "../utils/Pop";
 
@@ -90,9 +91,10 @@ export default {
     return {
       newEventData,
       today: '2022-06-24',
-      createEvent() {
+      async createEvent() {
         try {
-          eventsService.createEvent(newEventData.value)
+          const newEvent = await eventsService.createEvent(newEventData.value)
+          router.push({ name: 'Event', params: { id: newEvent.id } })
         } catch (error) {
           Pop.toast(error.message, "error")
           console.error(error)

@@ -1,8 +1,8 @@
 
 <template>
   <div class="row">
-    <div class="col-12 background-img rounded my-2">
-      <div class="row p-4">
+    <div class="col-12 background-img rounded my-2" :style="getBackgroundImg(activeEvent.coverImg)">
+      <div class="row p-4 content">
         <div class="col-md-4">
           <img class="img-fluid rounded elevation-3" :src="activeEvent.coverImg" alt="">
         </div>
@@ -13,7 +13,7 @@
               <h5>{{ activeEvent.location }}</h5>
             </div>
             <div class="d-flex flex-column mt-2">
-              {{ activeEvent.startDate }}
+              {{ setDateFormat(activeEvent.startDate) }}
               <button v-if="!activeEvent.isCanceled && activeEvent.creatorId == account.id" @click="deleteEvent()"
                 class="btn btn-danger mt-2">DeleteEvent</button>
             </div>
@@ -83,6 +83,14 @@ export default {
           console.error(error)
           Pop.toast(error.message, "error")
         }
+      },
+      setDateFormat(date) {
+        let newDate = new Date(date)
+        newDate = newDate.toDateString()
+        return newDate
+      },
+      getBackgroundImg(url) {
+        return `background-image : url('${url}')`
       }
     }
   }
@@ -92,6 +100,14 @@ export default {
 
 <style lang="scss" scoped>
 .background-img {
-  background-color: rgba(86, 199, 251, 1);
+  // background-image: url('https://www.gannett-cdn.com/-mm-/c869b79e4ee3133ee518af96c8189072b8a50510/c=0-136-2700-1661/local/-/media/2017/11/13/USATODAY/USATODAY/636461566935008690-Beauty-and-the-Beast-Waltz.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.content {
+  backdrop-filter: blur(3px);
+  text-shadow: 1px 1px black;
+  background-color: rgba(86, 199, 251, .5);
 }
 </style>

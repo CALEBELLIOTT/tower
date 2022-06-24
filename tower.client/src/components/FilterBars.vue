@@ -62,17 +62,21 @@ export default {
 .nav-item:hover {
   cursor: pointer;
   border-bottom: 4px solid rgba(121, 231, 171, 1);
-  transition: 500ms;
+  border-radius: 15%;
+  transition: 750ms;
   color: rgba(121, 231, 171, 1);
 }
 
 .nav-item {
   border-bottom: 4px solid rgba(42, 45, 58, 1);
+  transition: 1000ms;
+
 }
 
 .active {
   color: rgba(121, 231, 171, 1);
   border-bottom: 4px solid rgba(121, 231, 171, 1);
+  border-radius: 15%;
 }
 
 .v-enter-active,
