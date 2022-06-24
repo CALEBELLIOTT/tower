@@ -10,7 +10,7 @@
       <div class="col-12">
         <img class="my-2 profile-img" v-for="t in tickets" :title="t.account.name" :src="t.account.picture" alt="">
         <div v-if="tickets.length == 0" class="d-flex align-items-center justify-content-center profile-row">
-          <p class=" text-dark-lighten">nobody to show</p>
+          <p class=" text-light">nobody to show...</p>
         </div>
       </div>
     </div>

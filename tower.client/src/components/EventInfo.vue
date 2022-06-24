@@ -22,7 +22,7 @@
           <div class="d-flex justify-content-between">
             <h4 v-if="!activeEvent.isCanceled"><span class="text-danger">{{ activeEvent.capacity }}</span> spots left
             </h4>
-            <h4 v-if="activeEvent.isCanceled" class="bg-danger">EVENT HAS BEEN CANCELLED</h4>
+            <h4 v-if="activeEvent.isCanceled" class="bg-danger p-2">EVENT HAS BEEN CANCELLED</h4>
             <button v-if="checkAttending()" @click="cancelAttendEvent" class="btn btn-danger"><i
                 class="mdi mdi-human-handsdown"></i>
               Cancel Attendance</button>
