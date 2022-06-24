@@ -66,6 +66,12 @@ class EventsService {
     AppState.activeEvent = res.data
     console.log(AppState.activeEvent);
   }
+
+  async getEventsByAccount() {
+    const res = await api.get('account/tickets')
+    AppState.accountEvents = res.data
+    console.log(res.data);
+  }
 }
 
 export const eventsService = new EventsService()

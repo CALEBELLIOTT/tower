@@ -1,6 +1,13 @@
 
 <template>
-  <div class="row bg-dark-lighten">
+  <div class="row text-muted">
+    <div class="col-2 d-flex">
+      <transition>
+        <p v-show="filtered === true" id="none" @click="setActive('none')" class="nav-item">reset filter</p>
+      </transition>
+    </div>
+  </div>
+  <div class="row bg-dark-lighten mt-2">
     <div @click="setActive('concert')" id="concert" class="col-md-3 col-6 d-flex justify-content-center nav-item">
       <h3>Concert</h3>
     </div>
@@ -18,15 +25,18 @@
 
 
 <script>
+import { computed } from "vue";
 import { AppState } from "../AppState";
 import { eventsService } from "../services/EventsService";
 
 export default {
   setup() {
+    let filtered = computed(() => AppState.filtered)
     return {
-      // NOTE type refers to a number corresponding to the targeted type of post
-      // 1- concert 2- convention 3- sport 4- digital
+      filtered,
       async setActive(type) {
+        AppState.filtered = true
+        console.log(filtered);
         let targets = document.getElementsByClassName('nav-item')
         for (let i = 0; i < targets.length; i++) {
           const element = targets[i];
@@ -34,6 +44,11 @@ export default {
         }
         document.getElementById(type).classList.add('active')
         await eventsService.getEvents()
+        if (type == 'none') {
+          AppState.filtered = false
+          console.log(AppState.filtered);
+          return
+        }
         AppState.events = AppState.events.filter(e => e.type == type)
       }
     }
@@ -58,5 +73,15 @@ export default {
 .active {
   color: rgba(121, 231, 171, 1);
   border-bottom: 4px solid rgba(121, 231, 171, 1);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
