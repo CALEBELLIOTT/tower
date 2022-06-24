@@ -35,6 +35,12 @@ class EventsService {
     console.log(res.data);
   }
 
+  async deleteComment(commentId) {
+    const res = await api.delete('api/comments/' + commentId)
+    AppState.activeEventComments = AppState.activeEventComments.filter(c => c.id != commentId)
+    console.log(res.data);
+  }
+
   async attendEvent() {
     let body = {
       eventId: AppState.activeEvent.id,

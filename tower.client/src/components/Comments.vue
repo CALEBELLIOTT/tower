@@ -19,7 +19,12 @@
         <div v-for="c in comments" :key="c.id" class="col-12 d-flex align-items-center my-3">
           <img class="profile-img" :src="c.creator.picture" alt="">
           <div class="d-flex flex-column mx-3 bg-primary rounded comment-body p-2 my-2">
-            <p class="m-0 me-5 ms-2"><b>{{ c.creator.name }}</b></p>
+            <div class="d-flex">
+              <p class="m-0 me-2 ms-2"><b>{{ c.creator.name }}</b></p>
+              <button @click="deleteComment(`${c.id}`)" v-if="c.creator.id == account.id"
+                class="btn btn-outline-danger">delete
+                comment</button>
+            </div>
             <p class="mt-2 m-0 me-5 ms-2">{{ c.body }}</p>
           </div>
         </div>
@@ -33,6 +38,7 @@
 import { computed, ref } from "vue"
 import { AppState } from "../AppState"
 import { eventsService } from "../services/EventsService"
+import Pop from "../utils/Pop"
 
 export default {
   setup() {
@@ -40,9 +46,25 @@ export default {
     return {
       commentData,
       comments: computed(() => AppState.activeEventComments),
+      account: computed(() => AppState.account),
       async postComment() {
-        await eventsService.postComment(commentData.value)
+        try {
+          await eventsService.postComment(commentData.value)
+        } catch (error) {
+          Pop.toast(error.message, "error")
+          console.error(error)
+        }
         commentData.value.body = ""
+      },
+      async deleteComment(commentId) {
+        try {
+          if (await Pop.confirm('are you sure you want to delete this comment?', '', 'warning', 'Yes! Delete it')) {
+            await eventsService.deleteComment(commentId)
+          }
+        } catch (error) {
+          Pop.toast(error.message, "error")
+          console.error(error)
+        }
       }
     }
   }
