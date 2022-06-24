@@ -1,13 +1,13 @@
 
 <template>
-  <div class="row text-muted">
+  <div class="row text-light">
     <div class="col-2 d-flex">
       <transition>
         <p v-show="filtered === true" id="none" @click="setActive('none')" class="nav-item">reset filter</p>
       </transition>
     </div>
   </div>
-  <div class="row bg-dark-lighten mt-2">
+  <div class="row bg-dark-lighten mt-2 nav-row">
     <div @click="setActive('concert')" id="concert" class="col-md-3 col-6 d-flex justify-content-center nav-item">
       <h3>Concert</h3>
     </div>
@@ -72,6 +72,7 @@ export default {
   transition: 1000ms;
 
 }
+
 
 .active {
   color: rgba(121, 231, 171, 1);

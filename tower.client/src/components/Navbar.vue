@@ -4,11 +4,11 @@
     <div class="col-12 d-flex flex-column bg-dark-lighten align-items-center">
       <login></login>
       <router-link :to='{ name: "Home" }'>
-        <h5 class="my-2">Home</h5>
+        <h5 class="my-2 nav">Home</h5>
       </router-link>
       <div v-if="user.name" class="d-flex flex-column align-items-center">
         <router-link :to="{ name: 'Account' }">
-          <h5 class="my-2">Account</h5>
+          <h5 class="my-2 nav">Account</h5>
         </router-link>
         <button class="btn btn-success my-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Create Event</button>
         <button @click="logout()" class="btn btn-outline-light my-2">Log Out</button>
@@ -52,5 +52,15 @@ a:hover {
 .bg-dark-lighten {
   background: linear-gradient(rgba(71, 76, 97, 1), rgba(42, 45, 58, 1));
   height: 100vh;
+}
+
+.nav {
+  color: var(--bs-light);
+  transition: 500ms;
+}
+
+.nav:hover {
+  color: var(--bs-success);
+  transition: 500ms;
 }
 </style>

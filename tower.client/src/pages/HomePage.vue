@@ -4,7 +4,7 @@
     <HeroImg></HeroImg>
     <FilterBars></FilterBars>
     <div class="row">
-      <div v-if="events.length < 1" class="col-12 d-flex justify-content-center mt-5 text-muted">
+      <div v-if="events.length < 1" class="col-12 d-flex justify-content-center mt-5 text-light">
         <p>Nothing To Show Here...</p>
       </div>
       <div class="col-md-3" v-for="e in events" :key="e.id">
