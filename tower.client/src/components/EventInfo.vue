@@ -14,15 +14,20 @@
             </div>
             <div class="d-flex flex-column mt-2">
               {{ activeEvent.startDate }}
+              <button v-if="!activeEvent.isCanceled && activeEvent.creatorId == account.id" @click="deleteEvent()"
+                class="btn btn-danger mt-2">DeleteEvent</button>
             </div>
           </div>
           <p class="mt-5">{{ activeEvent.description }}</p>
           <div class="d-flex justify-content-between">
-            <h4><span class="text-danger">{{ activeEvent.capacity }}</span> spots left</h4>
+            <h4 v-if="!activeEvent.isCanceled"><span class="text-danger">{{ activeEvent.capacity }}</span> spots left
+            </h4>
+            <h4 v-if="activeEvent.isCanceled" class="bg-danger">EVENT HAS BEEN CANCELLED</h4>
             <button v-if="checkAttending()" @click="cancelAttendEvent" class="btn btn-danger"><i
                 class="mdi mdi-human-handsdown"></i>
               Cancel Attendance</button>
-            <button v-if="checkAttending() == false && activeEvent.capacity > 0 && activeEvent.isCancelled != true"
+            <button
+              v-if="checkAttending() == false && activeEvent.capacity > 0 && !activeEvent.isCanceled && account.id"
               @click="attendEvent" class="btn btn-warning"><i class="mdi mdi-human-handsdown"></i>
               Attend</button>
           </div>
@@ -42,7 +47,7 @@ import Pop from "../utils/Pop"
 
 export default {
   props: { activeEvent: { type: Object, required: true } },
-  setup() {
+  setup(props) {
     return {
       account: computed(() => AppState.account),
       tickets: computed(() => AppState.activeEventTickets),
@@ -68,6 +73,16 @@ export default {
           return true
         }
         return false
+      },
+      async deleteEvent() {
+        try {
+          if (await Pop.confirm('Are you sure you want to cancel this event?', 'this cannot be undone', 'warning', "yes! Cancel it!")) {
+            await eventsService.deleteEvent(props.activeEvent.id)
+          }
+        } catch (error) {
+          console.error(error)
+          Pop.toast(error.message, "error")
+        }
       }
     }
   }

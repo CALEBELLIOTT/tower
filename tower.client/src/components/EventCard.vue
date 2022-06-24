@@ -12,11 +12,12 @@
                 <p class="my-0 mx-2 pt-2"><b>{{ towerEvent.name }}</b></p>
                 <p class="text-secondary mx-2 m-0"><b>{{ towerEvent.location }}</b></p>
                 <p class="text-secondary mx-2 mb-0 pb-0"><b>{{ towerEvent.startDate }}</b></p>
-                <p v-if="towerEvent.capacity >= 1" class="text-end m-0 mx-2"><b><span class="text-danger">{{
-                    towerEvent.capacity
-                }}</span> Spots Left!</b></p>
+                <p v-if="towerEvent.capacity >= 1 && !towerEvent.isCanceled" class="text-end m-0 mx-2"><b><span
+                      class="text-danger">{{
+                          towerEvent.capacity
+                      }}</span> Spots Left!</b></p>
                 <p v-if="towerEvent.capacity <= 0" class="text-dark bg-danger m-0 text-center"><b>SOLD OUT</b></p>
-                <p v-if="towerEvent.isCancelled == true" class="text-dark bg-danger m-0 text-center"><b>EVENT
+                <p v-if="towerEvent.isCanceled == true" class="text-dark bg-danger m-0 text-center"><b>EVENT
                     CANCELLED</b></p>
               </div>
             </div>

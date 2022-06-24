@@ -50,7 +50,7 @@ class TowerEventsService {
     }
     target.isCanceled = target.isCanceled ? false : true
     await target.save()
-    return ("event cancelled")
+    return (target)
   }
 
 

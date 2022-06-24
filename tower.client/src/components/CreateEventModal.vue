@@ -50,7 +50,7 @@
                     </div>
                     <div class=" my-2 col-md-4">
                       <label for="">Event Date</label>
-                      <input v-model="newEventData.startDate" required class="form-control" type="date">
+                      <input :min="today" v-model="newEventData.startDate" required class="form-control" type="date">
                     </div>
                     <div class=" my-2 col-md-4">
                       <label for="">Event Capacity</label>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-12 d-flex justify-content-end my-2">
                       <button class="btn btn-danger mx-2" data-bs-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-success mx-2">Create Event</button>
+                      <button type="submit" data-bs-dismiss="modal" class="btn btn-success mx-2">Create Event</button>
                     </div>
                   </div>
                 </form>
@@ -82,15 +82,21 @@
 <script>
 import { ref } from "vue";
 import { eventsService } from "../services/EventsService";
+import Pop from "../utils/Pop";
 
 export default {
   setup() {
     let newEventData = ref({})
     return {
       newEventData,
+      today: '2022-06-24',
       createEvent() {
-        console.log(newEventData.value);
-        eventsService.createEvent(newEventData.value)
+        try {
+          eventsService.createEvent(newEventData.value)
+        } catch (error) {
+          Pop.toast(error.message, "error")
+          console.error(error)
+        }
       }
     }
   }

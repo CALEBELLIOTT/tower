@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="row bg-dark">
+    <div class="row bg-dark min-height">
       <div class="col-md-11">
         <main>
           <router-view />
@@ -32,5 +32,9 @@ export default {
 
 .sticky {
   position: fixed
+}
+
+.min-height {
+  min-height: 100vh;
 }
 </style>
